@@ -1,6 +1,6 @@
 const headerMenuConfig = [];
 
-const asideMenuConfig = [
+const arr = [
   {
     name: '数据页面',
     path: '/',
@@ -28,6 +28,7 @@ const asideMenuConfig = [
       {
         name: '单列表单',
         path: '/form/basic',
+        auth: ['guest'],
       },
       {
         name: '两列表单',
@@ -189,5 +190,13 @@ const asideMenuConfig = [
     ],
   },
 ];
+
+const asideMenuConfig = function () {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(arr);
+    }, 2000);
+  });
+};
 
 export { headerMenuConfig, asideMenuConfig };

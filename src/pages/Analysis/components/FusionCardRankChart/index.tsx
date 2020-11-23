@@ -45,8 +45,8 @@ const FusionCardRankChart: React.FunctionComponent<FusionCardRankChartProps> = (
           <Cell colSpan={3}>
             <Box justify="flex-start" spacing={20} className={styles.histogram}>
               {dataSource &&
-                dataSource.map((item) => (
-                  <Box justify="flex-start" spacing={5}>
+                dataSource.map((item, index) => (
+                  <Box justify="flex-start" spacing={5} key={index}>
                     <div className={styles.hisTitle}>{item.name}</div>
                     <Box direction="row">
                       <div style={{ backgroundColor: item.color, width: item.rate }} />

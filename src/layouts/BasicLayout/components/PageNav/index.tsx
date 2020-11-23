@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link, withRouter } from 'ice';
+import { Link, withRouter, useAuth } from 'ice';
 import { Nav } from '@alifd/next';
 import { asideMenuConfig } from '../../menuConfig';
+import { Loading } from '@alifd/next';
 
 const { SubNav } = Nav;
 const NavItem = Nav.Item;
 
 // mock the auth object
 // Ref: https://ice.work/docs/guide/advance/auth#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9D%83%E9%99%90%E6%95%B0%E6%8D%AE
-const AUTH_CONFIG = {
-  admin: true,
-  guest: false,
-};
+//权限
+// const AUTH_CONFIG = {
+//   admin: true,
+//   guest: false,
+// };
 
 export interface IMenuItem {
   name: string;
@@ -73,42 +75,50 @@ function getSubMenuOrItem(item: IMenuItem, index?: number | string, auth?: any) 
 
 const Navigation = (props, context) => {
   const [openKeys, setOpenKeys] = useState<string[]>([]);
+  const [asideMenuConfigs, setAsideMenuConfigs] = useState<string[]>([]);
 
   const { location } = props;
   const { pathname } = location;
   const { isCollapse } = context;
 
+  const [auth] = useAuth();         //后端获取的权限
+
   useEffect(() => {
-    const curSubNav = asideMenuConfig.find((menuConfig) => {
-      return menuConfig.children && checkChildPathExists(menuConfig);
-    });
+    asideMenuConfig().then((value:any[])=>{
+      const curSubNav = value.find((menuConfig) => {
+        return menuConfig.children && checkChildPathExists(menuConfig);
+      });
+      if (curSubNav && !openKeys.includes(curSubNav.name)) {
+        setOpenKeys([...openKeys, curSubNav.name]);
+      }
+      setAsideMenuConfigs(value)
+    })
+    
 
     function checkChildPathExists(menuConfig) {
       return menuConfig.children.some(child => {
         return child.children ? checkChildPathExists(child) : child.path === pathname;
       });
     }
-
-    if (curSubNav && !openKeys.includes(curSubNav.name)) {
-      setOpenKeys([...openKeys, curSubNav.name]);
-    }
   }, [pathname]);
 
   return (
-    <Nav
-      type="normal"
-      openKeys={openKeys}
-      selectedKeys={[pathname]}
-      defaultSelectedKeys={[pathname]}
-      embeddable
-      activeDirection="right"
-      iconOnly={isCollapse}
-      hasArrow={false}
-      mode={isCollapse ? 'popup' : 'inline'}
-      onOpen={setOpenKeys}
-    >
-      {getNavMenuItems(asideMenuConfig, 0, AUTH_CONFIG)}
-    </Nav>
+    <Loading visible={asideMenuConfigs.length === 0} fullScreen>
+      <Nav
+        type="normal"
+        openKeys={openKeys}
+        selectedKeys={[pathname]}
+        defaultSelectedKeys={[pathname]}
+        embeddable
+        activeDirection="right"
+        iconOnly={isCollapse}
+        hasArrow={false}
+        mode={isCollapse ? 'popup' : 'inline'}
+        onOpen={setOpenKeys}
+      >
+        {getNavMenuItems(asideMenuConfigs, 0, auth)}
+      </Nav>
+    </Loading>
   );
 };
 
