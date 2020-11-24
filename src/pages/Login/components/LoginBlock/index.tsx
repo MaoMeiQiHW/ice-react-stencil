@@ -4,6 +4,8 @@ import { Input, Message, Form, Divider, Checkbox, Icon } from '@alifd/next';
 import { useInterval } from './utils';
 import styles from './index.module.scss';
 
+import userService from '../../services/repo';
+
 const { Item } = Form;
 
 export interface IDataSource {
@@ -62,6 +64,7 @@ const LoginBlock: React.FunctionComponent<LoginProps> = (
   };
 
   const handleSubmit = (values: IDataSource, errors: []) => {
+    userService.getUser(); 
     if (errors) {
       console.log('errors', errors);
       return;

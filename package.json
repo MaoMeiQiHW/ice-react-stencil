@@ -29,8 +29,10 @@
     "stylelint": "^13.2.0"
   },
   "scripts": {
-    "start": "icejs start",
-    "build": "icejs build",
+    "start": "icejs start --mode local",
+    "build": "icejs build --mode local",
+    "build:daily": "icejs build --mode daily",
+    "build:prod": "icejs build --mode prod",
     "lint": "npm run eslint && npm run stylelint",
     "eslint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./",
     "eslint:fix": "npm run eslint -- --fix",
