@@ -64,7 +64,12 @@ const LoginBlock: React.FunctionComponent<LoginProps> = (
   };
 
   const handleSubmit = (values: IDataSource, errors: []) => {
-    userService.getUser(); 
+    userService.getUser().catch((err) => {
+      console.log(err, '/user');
+    });;
+    userService.getUser1().catch((err) => {
+      console.log(err, '/updateFile');
+    });;
     if (errors) {
       console.log('errors', errors);
       return;

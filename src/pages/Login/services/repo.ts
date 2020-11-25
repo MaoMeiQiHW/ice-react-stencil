@@ -3,7 +3,16 @@ import { request } from 'ice';
 export default {
   // 简单场景
   async getUser() {
-    return await request('/user');
+    return await request({
+      url: '/user',
+    });
+  },
+  // 简单场景
+  async getUser1() {
+    return await request({
+      url: '/updateFile',
+      instanceName: 'uploadFile',
+    });
   },
 
   // 参数场景
