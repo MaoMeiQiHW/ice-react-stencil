@@ -1,12 +1,18 @@
 import { request } from 'ice';
 
 export default {
-  // 简单场景
-  async getUser() {
+  // 登录
+  async login(username, password) {
     return await request({
-      url: '/user',
+      url: '/login',
+      method: 'post',
+      data: {
+        userName: username,
+        password: password,
+      },
     });
   },
+
   // 简单场景
   async getUser1() {
     return await request({

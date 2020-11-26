@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Input, Message, Form, Divider, Checkbox, Icon } from '@alifd/next';
+import { history } from 'ice';
 
 import { useInterval } from './utils';
 import styles from './index.module.scss';
@@ -64,18 +65,27 @@ const LoginBlock: React.FunctionComponent<LoginProps> = (
   };
 
   const handleSubmit = (values: IDataSource, errors: []) => {
-    userService.getUser().catch((err) => {
-      console.log(err, '/user');
-    });;
-    userService.getUser1().catch((err) => {
-      console.log(err, '/updateFile');
-    });;
     if (errors) {
-      console.log('errors', errors);
-      return;
+      if(errors.name){
+        Message.warning(errors.name.errors[0]);
+        return;
+      }
+      if(errors.password){
+        Message.warning(errors.password.errors[0]);
+        return;
+      }
     }
-    console.log('values:', values);
-    Message.success('登录成功');
+    userService.login(values.name,values.password).then((v)=>{
+        if(v.status === 1){
+          Message.success('登录成功');
+          sessionStorage.setItem('token',v.data.token);
+          history.push('/');
+        }else{
+          Message.warning(v.message);
+        }
+    }).catch((err) => {
+      
+    });
   };
 
   const phoneForm = (
@@ -121,10 +131,10 @@ const LoginBlock: React.FunctionComponent<LoginProps> = (
 
   const accountForm = (
     <>
-      <Item required requiredMessage="必填">
+      <Item required requiredMessage="用户名必填">
         <Input name="name" maxLength={20} placeholder="用户名" />
       </Item>
-      <Item required requiredMessage="必填" style={{ marginBottom: 0 }}>
+      <Item required requiredMessage="密码必填" style={{ marginBottom: 0 }}>
         <Input.Password name="password" htmlType="password" placeholder="密码" />
       </Item>
     </>

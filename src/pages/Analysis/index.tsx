@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{ useEffect } from 'react';
+import { request } from 'ice';
 import { ResponsiveGrid } from '@alifd/next';
 import PageHeader from '@/components/PageHeader';
 import FusionCardBarChart from './components/FusionCardBarChart';
@@ -12,6 +13,15 @@ import FusionCardGroupBarChart from './components/FusionCardGroupBarChart';
 const { Cell } = ResponsiveGrid;
 
 const Analysis = () => {
+
+  useEffect(() => {
+    // 超时接口
+    // request({
+    //   url:'/beOverdue',
+    //   method:'post'
+    // })
+  });
+
   return (
     <ResponsiveGrid gap={20}>
       <Cell colSpan={12}>

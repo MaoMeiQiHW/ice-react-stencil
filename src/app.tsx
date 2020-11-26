@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { runApp, IAppConfig, config } from 'ice';
+import { runApp, IAppConfig, config,history } from 'ice';
 import LocaleProvider from '@/components/LocaleProvider';
 import { getLocale } from '@/utils/locale';
+import { Message } from '@alifd/next';
 
 const locale = getLocale();
 
@@ -40,7 +41,7 @@ const appConfig: IAppConfig = {
         request: {
             onConfig: (config) => {
               // 发送请求前：可以对 RequestConfig 做一些统一处理
-              config.headers = { a: 1 };
+              // config.headers = { a: 1 };
               return config;
             },
             onError: (error) => {
@@ -50,13 +51,15 @@ const appConfig: IAppConfig = {
         response: {
           onConfig: (response) => {
             // 请求成功：可以做全局的 toast 展示，或者对 response 做一些格式化
-            if (!response.data.status !== 1) {
-              alert('请求失败');
+            if (response.data.status === 302) {
+              Message.warning('登录超时请重新登录');
+              history.push('/user/login');
             }
             return response;
           },
           onError: (error) => {
             // 请求出错：服务端返回错误状态码
+            Message.warning('系统超时请稍后再试');
             console.log(error,'app.js');
             return Promise.reject(error);
           }

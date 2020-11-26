@@ -1,7 +1,7 @@
 export default {
   // 本地
   local: {
-    baseURL: 'https://localhost:6666/api',
+    baseURL: `http://localhost:${process.env.SERVER_PORT}/api`,
   },
   // 测试
   dailt: {
