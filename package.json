@@ -1,6 +1,8 @@
 {
   "name": "ice-react-stencil",
   "version": "0.1.0",
+  "main": "main.js",
+  "homepage": ".",
   "description": "使用 TypeScript，包含大量 UI 区块，比如图表、表单等。",
   "dependencies": {
     "@alifd/next": "^1.21.0-beta.4",
@@ -24,6 +26,9 @@
     "@iceworks/spec": "^1.0.0",
     "build-plugin-fusion": "^0.1.0",
     "build-plugin-moment-locales": "^0.1.0",
+    "electron": "^11.0.3",
+    "electron-builder": "^22.9.1",
+    "electron-packager": "^15.1.0",
     "eslint": "^6.8.0",
     "ice.js": "^1.0.0",
     "stylelint": "^13.2.0"
@@ -33,11 +38,16 @@
     "build": "icejs build --mode local",
     "build:daily": "icejs build --mode daily",
     "build:prod": "icejs build --mode prod",
+    "build:linux": "node_modules/.bin/electron-builder -l",
+    "build:windows": "node_modules/.bin/electron-builder -w",
+    "build:mac": "node_modules/.bin/electron-builder -m",
     "lint": "npm run eslint && npm run stylelint",
     "eslint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./",
     "eslint:fix": "npm run eslint -- --fix",
     "stylelint": "stylelint '**/*.{css,scss,less}'",
-    "design": "icejs build --design"
+    "design": "icejs build --design",
+    "electron-start": "electron .",
+    "package": "electron-packager /HWFiles/hw-git-project/ice-react-stencil ice-react-stencil --windows --out ~/ --electron-version 11.0.3"
   },
   "ideMode": {
     "name": "ice-react"
@@ -52,6 +62,41 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/alibaba-fusion/materials/tree/master/scaffolds/fusion-design-pro"
+  },
+  "build": {
+    "productName":"xxxx",
+    "appId": "com.leon.xxxxx",
+    "copyright":"xxxx",
+    "directories": {
+      "output": "build"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://xxxxx/"
+      }
+    ],
+    "files": [
+      "dist/electron/**/*"
+    ],
+    "win": {
+      "icon": "build/icons/aims.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "ia32"
+          ]
+        }
+      ]
+    }
   },
   "private": true,
   "originTemplate": "@alifd/fusion-design-pro"
