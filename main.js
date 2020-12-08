@@ -8,7 +8,11 @@ let mainWindow;
 
 function createWindow() {
   // 创建浏览器窗口  全屏
-  mainWindow = new BrowserWindow({fullscreen: true});
+  // mainWindow = new BrowserWindow({fullscreen: true});
+
+  mainWindow = new BrowserWindow({ show: false });
+  mainWindow.maximize();
+  mainWindow.show();
 
   // 加载应用-----  electron-quick-start中默认的加载入口
   mainWindow.loadURL(url.format({
@@ -28,7 +32,7 @@ function createWindow() {
     mainWindow = null;
   });
 
-  //影藏顶部导航栏
+  // 影藏顶部导航栏
   Menu.setApplicationMenu(null);
 }
 
