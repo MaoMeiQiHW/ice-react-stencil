@@ -1,5 +1,5 @@
 // 引入electron并创建一个Browserwindow
-const { app, BrowserWindow,globalShortcut } = require('electron');
+const { app, BrowserWindow, globalShortcut } = require('electron');
 const path = require('path');
 const url = require('url');
 
@@ -7,7 +7,7 @@ const url = require('url');
 let mainWindow;
 
 function createWindow() {
-  //创建浏览器窗口,宽高自定义具体大小你开心就好
+  // 创建浏览器窗口,宽高自定义具体大小你开心就好
   mainWindow = new BrowserWindow({ width: 800, height: 600 });
 
   // 加载应用-----  electron-quick-start中默认的加载入口
@@ -18,7 +18,7 @@ function createWindow() {
   }));
 
   // 加载应用----适用于 react 项目
-  mainWindow.loadURL('http://localhost:3333/');
+  // mainWindow.loadURL('http://localhost:3333/');
 
   // 打开开发者工具，默认不打开
   // mainWindow.webContents.openDevTools()
