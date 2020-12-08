@@ -13,8 +13,6 @@
     "ahooks": "^2.0.0",
     "bizcharts": "^3.5.6",
     "build-plugin-ice-auth": "^1.7.2",
-    "cross-env": "^7.0.3",
-    "electron-is-dev": "^1.2.0",
     "lodash.debounce": "^4.0.8",
     "moment": "^2.24.0",
     "prop-types": "^15.5.8",
@@ -28,14 +26,12 @@
     "@iceworks/spec": "^1.0.0",
     "build-plugin-fusion": "^0.1.0",
     "build-plugin-moment-locales": "^0.1.0",
-    "concurrently": "^5.3.0",
     "electron": "^11.0.3",
     "electron-builder": "^22.9.1",
     "electron-packager": "^15.1.0",
     "eslint": "^6.8.0",
     "ice.js": "^1.0.0",
-    "stylelint": "^13.2.0",
-    "wait-on": "^5.2.0"
+    "stylelint": "^13.2.0"
   },
   "scripts": {
     "start": "icejs start --mode local",
@@ -63,21 +59,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/alibaba-fusion/materials/tree/master/scaffolds/fusion-design-pro"
-  },
-  "build": {
-    "productName": "xxxx",
-    "appId": "com.leon.xxxxx",
-    "copyright": "xxxx",
-    "directories": {
-      "output": "build"
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowElevation": true,
-      "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
-    }
   },
   "private": true,
   "originTemplate": "@alifd/fusion-design-pro"
