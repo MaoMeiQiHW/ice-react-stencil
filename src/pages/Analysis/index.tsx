@@ -15,11 +15,7 @@ const { Cell } = ResponsiveGrid;
 const Analysis = () => {
 
   useEffect(() => {
-    // 超时接口
-    // request({
-    //   url:'/beOverdue',
-    //   method:'post'
-    // })
+    
   });
 
   return (

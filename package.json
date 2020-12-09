@@ -16,6 +16,7 @@
     "lodash.debounce": "^4.0.8",
     "moment": "^2.24.0",
     "prop-types": "^15.5.8",
+    "qs": "^6.9.4",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-intl": "^2.8.0",
@@ -64,9 +65,9 @@
     "url": "https://github.com/alibaba-fusion/materials/tree/master/scaffolds/fusion-design-pro"
   },
   "build": {
-    "productName":"xxxx",
+    "productName": "xxxx",
     "appId": "com.leon.xxxxx",
-    "copyright":"xxxx",
+    "copyright": "xxxx",
     "directories": {
       "output": "build"
     },

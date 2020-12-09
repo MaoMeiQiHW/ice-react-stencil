@@ -1,11 +1,11 @@
 import { request } from 'ice';
 
-interface IState {
-  name: string;
-  department: string;
-  avatar: string;
-  userid: number | null;
-}
+// interface IState {
+//   name: string;
+//   department: string;
+//   avatar: string;
+//   userid: number | null;
+// }
 
 export default {
   state: {
@@ -16,11 +16,20 @@ export default {
   },
 
   effects: (dispatch) => ({
-    async fetchUserProfile() {
-      const res = await request('/api/profile');
-      if (res.status === 'SUCCESS') {
+    async fetchUserProfile(value) {
+      const res = await request({
+        url: 'managesignin',
+        method: 'post',
+        data: {
+          mobile: value.mobile,
+          password: value.password,
+          remeber: false,
+        },
+      });
+      if (res.error.length === 0) {
         dispatch.user.update(res.data);
       }
+      return res;
     },
   }),
 

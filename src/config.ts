@@ -1,11 +1,11 @@
 export default {
   // 本地
   local: {
-    baseURL: `http://localhost:${process.env.SERVER_PORT}/api`,
+    baseURL: 'http://uat.jishutao.com',
   },
   // 测试
   dailt: {
-    baseURL: 'https://daily.example.com/api',
+    baseURL: 'https://daily.example.com/api/',
   },
   // 生产
   prod: {

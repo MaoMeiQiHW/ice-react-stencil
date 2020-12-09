@@ -3,6 +3,8 @@ import { runApp, IAppConfig, config,history } from 'ice';
 import LocaleProvider from '@/components/LocaleProvider';
 import { getLocale } from '@/utils/locale';
 import { Message } from '@alifd/next';
+import Cookies from 'js-cookie';
+import qs from 'qs';
 
 const locale = getLocale();
 
@@ -30,18 +32,26 @@ const appConfig: IAppConfig = {
   request: [
     // 默认请求
     {
+      withCredentials: true,
       withFullResponse: false,
       baseURL: config.baseURL,
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'token': sessionStorage.getItem('token'),
-      },
       // 拦截器
-      interceptors: {
+      interceptors: { 
         request: {
             onConfig: (config) => {
               // 发送请求前：可以对 RequestConfig 做一些统一处理
-              // config.headers = { a: 1 };
+              console.log(config);
+              if(config.method === 'get'){
+                config.url = config.url + '?' + qs.stringify({
+                  ...(config.data || {}),
+                  token: Cookies.get('AFT_SID')
+                });
+              }else{
+                config.data = qs.stringify({
+                  ...(config.data || {}),
+                  token: Cookies.get('AFT_SID')
+                });
+              }
               return config;
             },
             onError: (error) => {
@@ -51,10 +61,11 @@ const appConfig: IAppConfig = {
         response: {
           onConfig: (response) => {
             // 请求成功：可以做全局的 toast 展示，或者对 response 做一些格式化
-            if (response.data.status === 302) {
+            if (response.data.error && response.data.error.length > 0 && response.data.error[0].field === "403") {
               Message.warning('登录超时请重新登录');
               history.push('/user/login');
             }
+            Cookies.set('AFT_SID',response.data.token);
             return response;
           },
           onError: (error) => {

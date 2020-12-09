@@ -1,6 +1,20 @@
+import configure from '../../services/configure';
+import { Message } from '@alifd/next';
+
 const headerMenuConfig = [];
 
 const arr = [
+  {
+    name: '我的订单',
+    path: '/',
+    icon: 'chart-pie',
+    children: [
+      {
+        name: '签单与签单',
+        path: '/order/billing',
+      },
+    ],
+  },
   {
     name: '数据页面',
     path: '/',
@@ -192,10 +206,14 @@ const arr = [
 ];
 
 const asideMenuConfig = function () {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(arr);
-    }, 2000);
+  return new Promise((resolve) => {
+    configure.getPrimaryNavigation().then((v) => {
+      if (v.error.length === 0) {
+        resolve(arr);
+      } else {
+        Message.warning(v.error[0].message);
+      }
+    });
   });
 };
 

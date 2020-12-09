@@ -4,21 +4,19 @@ export default {
   // 登录
   async login(username, password) {
     return await request({
-      url: '/login',
+      url: 'managesignin',
       method: 'post',
       data: {
-        userName: username,
-        password: password,
+        mobile: username,
+        password,
+        remeber: false,
       },
     });
   },
 
   // 简单场景
   async getUser1() {
-    return await request({
-      url: '/updateFile',
-      instanceName: 'uploadFile',
-    });
+    return await request({ url: '/updateFile',instanceName: 'uploadFile' });
   },
 
   // 参数场景

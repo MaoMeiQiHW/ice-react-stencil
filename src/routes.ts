@@ -36,6 +36,8 @@ import FeedbackServerError from '@/pages/FeedbackServerError';
 import Settings from '@/pages/Settings';
 import Person from '@/pages/Person';
 
+import Billing from '@/pages/Order/Billing';
+
 const routerConfig = [
   {
     path: '/user',
@@ -59,6 +61,10 @@ const routerConfig = [
     path: '/',
     component: BasicLayout,
     children: [
+      {
+        path: '/order/billing',
+        component: Billing,
+      },
       {
         path: '/solution',
         component: Solution,

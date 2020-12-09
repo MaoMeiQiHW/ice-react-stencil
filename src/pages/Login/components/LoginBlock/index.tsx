@@ -76,12 +76,11 @@ const LoginBlock: React.FunctionComponent<LoginProps> = (
       }
     }
     userService.login(values.name,values.password).then((v)=>{
-        if(v.status === 1){
+        if(v.error.length === 0){
           Message.success('登录成功');
-          sessionStorage.setItem('token',v.data.token);
           history.push('/');
         }else{
-          Message.warning(v.message);
+          Message.warning(v.error[0].message);
         }
     }).catch((err) => {
       
