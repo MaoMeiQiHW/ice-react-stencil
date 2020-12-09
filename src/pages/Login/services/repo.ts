@@ -4,7 +4,7 @@ export default {
   // 登录
   async login(username, password) {
     return await request({
-      url: '/login',
+      url: 'api/admin/selectMenuList',
       method: 'post',
       data: {
         userName: username,

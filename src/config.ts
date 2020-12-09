@@ -5,7 +5,7 @@ export default {
   },
   // 测试
   dailt: {
-    baseURL: 'https://daily.example.com/api',
+    baseURL: 'http://uat.jishutao.com/',
   },
   // 生产
   prod: {
