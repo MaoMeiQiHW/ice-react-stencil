@@ -39,16 +39,13 @@
     "build": "icejs build --mode local",
     "build:daily": "icejs build --mode daily",
     "build:prod": "icejs build --mode prod",
-    "build:linux": "node_modules/.bin/electron-builder -l",
-    "build:windows": "node_modules/.bin/electron-builder -w",
-    "build:mac": "node_modules/.bin/electron-builder -m",
     "lint": "npm run eslint && npm run stylelint",
     "eslint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./",
     "eslint:fix": "npm run eslint -- --fix",
     "stylelint": "stylelint '**/*.{css,scss,less}'",
     "design": "icejs build --design",
     "electron-start": "electron .",
-    "package": "electron-packager /HWFiles/hw-git-project/ice-react-stencil ice-react-stencil --windows --out ~/ --electron-version 11.0.3"
+    "package": "electron-packager /HWFiles/hw-git-project/ice-react-stencil ice-react-stencil --windows --out package/ --electron-version 11.0.3"
   },
   "ideMode": {
     "name": "ice-react"
